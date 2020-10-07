@@ -1,3 +1,9 @@
+"""
+Configuration:
+    script parameters:
+    firs n_lt oba_ htyp
+"""
+
 import sys
 import numpy as np
 import functions_lab_1 as f1

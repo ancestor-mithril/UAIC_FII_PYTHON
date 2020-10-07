@@ -1,5 +1,12 @@
+"""
+Configuration:
+    script parameters:
+    UpperCaseString
+"""
+
 
 import sys
+
 
 upper_case_string = sys.argv[1]
 snake_case_string = ""
