@@ -86,7 +86,7 @@ def build_xml_element(tag: str, content: str, **elements) -> str:
     """
     if content == "Hello there":
         content = "General Kenobi"
-    return "<{} {}>{}<{}>".format(
+    return "<{} {} >{}</{}>".format(
         tag,
         ', '.join(["{}={}".format(key, value) for key, value in elements.items()]),
         content,
