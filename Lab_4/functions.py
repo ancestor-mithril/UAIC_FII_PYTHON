@@ -27,7 +27,8 @@ def ex_2(directory_path: str, file_path: str):
     :return: nothing
     """
     with open(file_path, "w") as fd:
-        [fd.write(os.path.abspath(f)) for f in os.listdir(directory_path) if os.path.isfile(f) and f.startswith("a")]
+        [fd.write(os.path.abspath(f) + os.linesep) for f in os.listdir(directory_path) if
+         os.path.isfile(f) and f.startswith("a")]
 
 
 def ex_4():
@@ -122,13 +123,18 @@ def ex_7(file_path: str) -> dict:
     :param file_path: path to file
     :return: dictionary with absolute file path, file size, file extension, can be read or written
     """
-    return {
-        "full_path": os.path.abspath(file_path),
-        "file_size": os.path.getsize(file_path),
-        "file_extension": os.path.splitext(file_path)[-1][1:],
-        "can_read": os.access(file_path, os.R_OK),
-        "can_write": os.access(file_path, os.W_OK),
-    }
+    try:
+        if os.path.isdir(file_path):
+            raise Exception("path is dir")
+        return {
+            "full_path": os.path.abspath(file_path),
+            "file_size": os.path.getsize(file_path),
+            "file_extension": os.path.splitext(file_path)[-1][1:],
+            "can_read": os.access(file_path, os.R_OK),
+            "can_write": os.access(file_path, os.W_OK),
+        }
+    except Exception as e:
+        print(e)
 
 
 def ex_8(dir_path: str) -> List[str]:
@@ -140,4 +146,9 @@ def ex_8(dir_path: str) -> List[str]:
     :param dir_path: path to directory
     :return: list of paths to file in directory root
     """
-    return [os.path.abspath(f) for f in os.listdir(dir_path) if os.path.isfile(f)]
+    try:
+        if os.path.isfile(dir_path):
+            raise Exception("path is file, not dir")
+        return [os.path.abspath(f) for f in os.listdir(dir_path) if os.path.isfile(f)]
+    except Exception as e:
+        print(e)
