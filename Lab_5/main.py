@@ -51,9 +51,9 @@ print(
 )
 
 
-# Ex_8 = None
-# augmented_multiply_by_two = print_arguments(multiply_by_two)
-# print(augmented_multiply_by_two())
+Ex_8 = None
+augmented_multiply_by_two = print_arguments(multiply_by_two)
+print(augmented_multiply_by_two(3))
 
 
 # Ex_9 = None

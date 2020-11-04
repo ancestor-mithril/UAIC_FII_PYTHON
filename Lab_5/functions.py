@@ -164,8 +164,8 @@ def print_arguments(functions: callable) -> callable:
 def new_function(*args, **kwargs):
     print("Arguments are:", *args)
     print("Key arguments are:", **kwargs)
-    return """ + str(functions).split()[1] + "(*args, **kwargs)"
+    return functions(*args,**kwargs)"""
     print(function_string)
-    exec(function_string)
-    print(new_function("1"))
+    globals()["functions"] = multiply_by_two
+    exec(function_string, globals())
     return new_function
