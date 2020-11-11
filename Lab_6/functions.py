@@ -11,7 +11,7 @@ def extract_words(input_text: str) -> List[str]:
     :param input_text:
     :return: all words from input_text
     """
-    return re.findall(r"\w+", input_text)
+    return re.findall(r"[a-zA-Z0-9]+", input_text)
 
 
 def ex_2(regex: str, input_text: str, x: int) -> List[str]:
@@ -60,7 +60,7 @@ def ex_4(path: str, attributes: dict) -> List[str]:
         search_string = r"(<(\w+)" + r"".join(
             [" {key}=\"{value}\"".format(key=key, value=value) for key, value in attributes.items()]
         ) + r">[^</\2>]*</\2>)"
-        # print(search_string)
+        print(search_string)
         match_list += [x[0] for x in re.findall(search_string, xml_data)]
     return match_list
 
@@ -166,7 +166,7 @@ def ex_7(input_text: str) -> bool:
     control_digit = get_control_digit(input_text[:-1])
     regex_string = r"^" + match_first_digit + match_year + match_month + match_day + match_county + random_digits + \
                    control_digit + r"$"
-
+    print(regex_string)
     return bool(re.match(regex_string, input_text))
 
 

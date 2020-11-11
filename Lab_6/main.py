@@ -1,5 +1,6 @@
 from functions import extract_words, ex_2, ex_3, ex_4, ex_5, ex_6, ex_7, ex_8
 
+
 Ex_1 = None
 print(extract_words("text, ana, are mere"))
 
