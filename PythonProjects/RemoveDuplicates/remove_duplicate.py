@@ -1,8 +1,24 @@
-import sys
+"""C1: Remove Duplicates
 
+Primind un folder la intrare, identificați toate fișierele duplicate (același conținut) din acel folder
+și afișați o listă utilizatorului, cerându-i să decidă pe care dintre duplicate să le șteargă. În
+funcție de decizia utilizatorului, fișierele duplicate vor fi șterse sau nu.
+"""
+
+
+import sys
 from RemoveDuplicates.utils import get_duplicate_files, process_duplicates
 from utilities.custom_error import CustomError
 from utilities.utils import error_print
+
+
+__author__ = "ancestor-mithril"
+__copyright__ = ""
+__credits__ = [""]
+__license__ = ""
+__status__ = "Development"
+__version__ = "0.0.1"
+__all__ = [""]
 
 
 def run():
