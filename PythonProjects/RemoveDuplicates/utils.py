@@ -24,8 +24,8 @@ def get_duplicate_files(path_to_directory: str, recursive_walk: bool = True) -> 
                 os.path.isfile(os.path.join(root, file_name)) and os.access(os.path.join(root, file_name), os.R_OK)
             ]
     else:
-        all_files = [f for f in os.listdir() if os.path.isfile(f)]
-
+        all_files = [os.path.abspath(os.path.join(path_to_directory, f)) for f in os.listdir(path_to_directory)
+                     if os.path.isfile(os.path.join(path_to_directory, f))]
     return return_duplicates(all_files)
 
 
@@ -63,6 +63,8 @@ def are_equal(file_1: str, file_2: str, chunk_size: int = 1024) -> bool:
     :param file_2: path to file
     :return: True, if files are equal, False otherwise
     """
+    # print(file_1)
+    # print(file_2)
     assert os.path.isfile(file_1) and os.path.isfile(file_2), "paths are not file"
     try:
         with open(file_1, 'rb') as fd_1:

@@ -3,6 +3,7 @@ import string
 import unittest
 import os
 import random
+import ntpath
 from RemoveDuplicates.utils import get_duplicate_files, are_equal
 
 
@@ -17,7 +18,8 @@ class RemoveDuplicatesTesting(unittest.TestCase):
             with open(j + str(i), "w") as f:
                 f.write(j)
         correct_result = [['a0', 'a1', 'a5'], ['i3', 'i4']]
-        self.assertEqual(get_duplicate_files(".", recursive_walk=False), correct_result, "test duplicates in dir root")
+        result = [[ntpath.basename(y) for y in x] for x in get_duplicate_files(".", recursive_walk=False)]
+        self.assertEqual(result, correct_result, "test duplicates in dir root")
         for i, j in enumerate("aaeiia"):
             os.remove(j + str(i))
 
