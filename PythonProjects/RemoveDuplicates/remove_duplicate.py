@@ -12,15 +12,6 @@ from utilities.custom_error import CustomError
 from utilities.utils import error_print
 
 
-__author__ = "ancestor-mithril"
-__copyright__ = ""
-__credits__ = [""]
-__license__ = ""
-__status__ = "Development"
-__version__ = "0.0.1"
-__all__ = [""]
-
-
 def run():
     """
     checks if minimum argv s are set

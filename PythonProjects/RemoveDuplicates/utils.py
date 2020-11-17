@@ -63,8 +63,6 @@ def are_equal(file_1: str, file_2: str, chunk_size: int = 1024) -> bool:
     :param file_2: path to file
     :return: True, if files are equal, False otherwise
     """
-    # print(file_1)
-    # print(file_2)
     assert os.path.isfile(file_1) and os.path.isfile(file_2), "paths are not file"
     try:
         with open(file_1, 'rb') as fd_1:
