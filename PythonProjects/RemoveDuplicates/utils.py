@@ -1,3 +1,4 @@
+import hashlib
 from typing import List
 import os
 from utilities.custom_error import CustomError
@@ -56,7 +57,7 @@ def return_duplicates(all_files: List[str]) -> List[List[str]]:
 
 def are_equal(file_1: str, file_2: str, chunk_size: int = 1024) -> bool:
     """
-    reads chunks of blocks for both files and checks them to be equal
+    reads chunks of blocks for both files and checks them to be equal by comparing hashes
 
     :param chunk_size: size of chunk to be read
     :param file_1: path to file
@@ -65,16 +66,18 @@ def are_equal(file_1: str, file_2: str, chunk_size: int = 1024) -> bool:
     """
     assert os.path.isfile(file_1) and os.path.isfile(file_2), "paths are not file"
     try:
+        hash_1 = hashlib.sha1()
+        hash_2 = hashlib.sha1()
         with open(file_1, 'rb') as fd_1:
             with open(file_2, 'rb') as fd_2:
                 while True:
                     data_1 = fd_1.read(chunk_size)
                     data_2 = fd_2.read(chunk_size)
-                    if data_1 != data_2:
-                        return False
-                    if not data_1:
+                    hash_1.update(data_1)
+                    hash_2.update(data_2)
+                    if not data_1 or not data_2:
                         break
-        return True
+        return hash_1.hexdigest() == hash_2.hexdigest()
     except Exception as e:
         raise CustomError(e)
 
