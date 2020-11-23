@@ -8,7 +8,7 @@ words = {
 }
 
 
-def run():
+def run(words):
     game_folder = "game_folder"
     try:
         os.makedirs(game_folder)
@@ -21,4 +21,4 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    run(words)
