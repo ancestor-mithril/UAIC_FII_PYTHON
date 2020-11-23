@@ -4,19 +4,7 @@ import re
 from typing import Pattern
 
 from utilities import error_print, color_print
-
-
-def handle_user_input(input_pattern: Pattern) -> str:
-    """
-
-    :param input_pattern: pattern expected from user
-    :return: matched pattern
-    """
-    while True:
-        user_input = input().lower()
-        if input_pattern.match(user_input):
-            return user_input
-        error_print("Alegere incorecta")
+from utilities.utils import handle_user_input
 
 
 def guessed(word: str, guessed_letters: set) -> bool:
@@ -56,12 +44,12 @@ def play_game(category: str, folder: str):
     max_guesses = 5 if (len(word) - 2) > 6 else (len(word) - 2)
     guessed_letters = {word[0], word[-1]}
     guesses = 0
-    pattern = re.compile(r"\w")
+    pattern = re.compile(r"\w", re.IGNORECASE)
     while guesses < max_guesses and not guessed(word, guessed_letters):
         word_print(word, guessed_letters)
         color_print(f"Alegeti o litera. Litere deja alese: '{', '.join(guessed_letters)}'. Numar de ghiciri"
                     f":{guesses}/{max_guesses}")
-        guessed_letter = handle_user_input(pattern)
+        guessed_letter = handle_user_input(pattern).lower()
         if guessed_letter not in guessed_letters:
             guessed_letters.update(guessed_letter)
             if guessed_letter not in word:
@@ -69,7 +57,8 @@ def play_game(category: str, folder: str):
         else:
             error_print(f"Letter {guessed_letter} already guessed")
     if guessed(word, guessed_letters):
-        color_print(f"Felicitari, ai castigat, cuvantul corect este <<{word}>>! Numarul de incercari este {guesses}",
+        color_print(f"Felicitari, ai castigat, cuvantul corect este <<{word}>>! Numarul de incercari este "
+                    f"{guesses}/{max_guesses}",
                     color="green")
     else:
         color_print(f"Cuvantul corect era <<{word}>>. Numar de incercari: {guesses}", color="red")

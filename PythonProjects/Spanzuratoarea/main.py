@@ -26,8 +26,8 @@ def run():
     color_print(f"Bine ai venit la spanzuratoarea!")
     color_print(f"Alege una din urmatoarele categorii pentru joc:\n{', '.join(os.listdir(game_folder))}")
     possible_categories = "|".join(os.listdir(game_folder))
-    pattern = re.compile(f"({possible_categories})")
-    chosen_category = handle_user_input(pattern)
+    pattern = re.compile(f"({possible_categories})", re.IGNORECASE)
+    chosen_category = handle_user_input(pattern).lower()
     play_game(chosen_category, game_folder)
 
 

@@ -1,4 +1,8 @@
 from __future__ import print_function
+
+import re
+from re import Pattern
+
 from termcolor import colored, cprint
 import sys
 
@@ -25,3 +29,16 @@ def color_print(*args, color: str = 'blue', **kwargs):
     """
     args = [colored(str(x), color) for x in args]
     print(*args, **kwargs)
+
+
+def handle_user_input(input_pattern: Pattern) -> str:
+    """
+
+    :param input_pattern: pattern expected from user
+    :return: matched pattern
+    """
+    while True:
+        user_input = input()
+        if re.match(input_pattern, user_input):
+            return user_input
+        error_print("Alegere incorecta")
